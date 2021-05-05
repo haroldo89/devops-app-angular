@@ -2,11 +2,24 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TutorialsListComponent } from './components/tutorials-list/tutorials-list.component';
 import { AddTutorialComponent } from './components/add-tutorial/add-tutorial.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
-  { path: 'tutorials', component: TutorialsListComponent },
-  { path: 'add', component: AddTutorialComponent }
+  { 
+    path: '', 
+    component: LoginComponent 
+  },
+  { 
+    path: 'tutorials', 
+    component: TutorialsListComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'add', 
+    component: AddTutorialComponent,
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({
