@@ -17,9 +17,9 @@ node {
         sh 'npm install'
 	}
 
-    stage('Unit Testing') {
-        sh 'npm run test-ci'
-    }
+    // stage('Unit Testing') {
+    //     sh 'npm run test-ci'
+    // }
 	
 	stage('SonarQube Analysis') {
         def sonarProjectKey = "demo-devops"
@@ -44,10 +44,10 @@ node {
         }
     }
 
-    stage('Archive artifact') {
-        return
-        archiveArtifacts '*.zip'    
-    }
+    // stage('Archive artifact') {
+    //     return
+    //     archiveArtifacts '*.zip'    
+    // }
     
     stage('Build Docker Image') {
         myapp = docker.build("${IMAGE_TAG}")
