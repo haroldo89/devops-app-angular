@@ -1,0 +1,41 @@
+<section id="login-mailbox" class="movistar">
+    <div class="overlay">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center mt-4 mt-3 mt-sm-5 mb-sm-4">
+            <h1 class="txt-white">Demo DevOps Palo IT</h1>
+          </div>
+          <div class="col-xl-4 offset-xl-4 col-md-8 offset-md-2 col-12">
+            <form class="box-login" (ngSubmit)="login()" [formGroup]="loginForm">
+              <div class="row">
+                <div class="col-12 text-center py-2 py-sm-3">
+                  <h2>Bienvenido</h2>
+                  <p>
+                    Ingrese su usuario y contraseña
+                  </p>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control with-icon valid" aria-describedby="emailHelp" placeholder="Usuario"
+                  matInput formControlName="username" required />
+                <span class="icon no-label">
+                  <i class="icon icon-face"></i>
+                </span>
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control passw" placeholder="Contraseña" formControlName="password"
+                  required />
+                <span class="icon no-label">
+                  <i class="icon icon-key"></i>
+                </span>
+              </div>
+              <button type="submit" class="btn btn-primary full" (click)="login()" >
+                Ingresar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

@@ -1,0 +1,284 @@
+/* You can add global styles to this file, and also import other style files */
+/* Color palette */
+:root {
+    --movistar-blue: #00a9e0;
+    --movistar-blueDark: #0098d2;
+    --movistar-blueLight-70: #4cc2e9;
+    --movistar-blueLight-50: #7fd4ef;
+    --movistar-blueLight-20: #b2e5f5;
+    --movistar-green: #5bc500;
+    --movistar-greenDark: #499e00;
+    --movistar-greenLight-40: #ade27f;
+    --movistar-greenLight-20: #cdedb2;
+    --pepper: #ff374a;
+    --pepper-dark: #d73241;
+    --pepper-light: #ff6173;
+    --purple: #954b97;
+    --pink: #e9426d;
+    --orange: #ec6839;
+    --egg: #f59c00;
+    --egg-light: #fce1b2;
+    --movistar-cool-grey: #2a2a3c;
+    --black: #000000;
+    --movistar-gunmetal: #63666d;
+    --grey-0: #3a3a3a;
+    --grey-1: #666666;
+    --grey-2: #757575;
+    --grey-3: #dddddd;
+    --grey-4: #eeeeee;
+    --grey-5: #f6f6f6;
+    --grey-movistar-4:#86888c;
+    --grey-shadow:#b6b7b7;
+    --white: #ffffff;
+  }
+  
+/* Fonts */
+@font-face {
+    font-family: "Telefonica";
+    src: url("fonts/TelefonicaWeb-Bold.eot");
+    src: local("TelefonicaWeb Bold"), local("TelefonicaWeb-Bold"),
+      url("fonts/TelefonicaWeb-Bold.eot?#iefix") format("embedded-opentype"),
+      url("fonts/TelefonicaWeb-Bold.woff") format("woff"),
+      url("fonts/TelefonicaWeb-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Telefonica";
+    src: url("fonts/TelefonicaWeb-Regular.eot");
+    src: local("TelefonicaWeb-Regular"),
+      url("fonts/TelefonicaWeb-Regular.eot?#iefix") format("embedded-opentype"),
+      url("fonts/TelefonicaWeb-Regular.woff") format("woff"),
+      url("fonts/TelefonicaWeb-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Telefonica";
+    src: url("fonts/TelefonicaWeb-Light.eot");
+    src: local("TelefonicaWeb-Light"),
+      url("fonts/TelefonicaWeb-Light.eot?#iefix") format("embedded-opentype"),
+      url("fonts/TelefonicaWeb-Light.woff") format("woff"),
+      url("fonts/TelefonicaWeb-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Telefonica";
+    src: url("fonts/TelefonicaWeb-ExtraLight.eot");
+    src: local("TelefonicaWeb-ExtraLight"),
+      url("fonts/TelefonicaWeb-ExtraLight.eot?#iefix") format("embedded-opentype"),
+      url("fonts/TelefonicaWeb-ExtraLight.woff") format("woff"),
+      url("fonts/TelefonicaWeb-ExtraLight.ttf") format("truetype");
+    font-weight: 100;
+    font-style: normal;
+  }
+  
+body {
+    font-family: "Telefonica" !important;
+    font-style: normal;
+    font-size: inherit;
+}
+.overlay {
+    display: table;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+}
+.overlay2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0+0,0.65+100 */
+    background: -moz-linear-gradient(left, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(0,0,0,0.85) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, rgba(0,0,0,0) 0%,rgba(0,0,0,0.85) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=1 ); /* IE6-9 */
+}
+/* Backgrounds colors */
+.movistar .bg-blue {
+    background-color: #00a9e0;
+}
+/* Backgrounds colors */
+/* Movistar & Telefónica Brand */
+.logo-movistar{
+    height: 35px
+}
+.logo-telefonica{
+    height: 35px
+}
+@media (max-width: 767px){
+    .logo-movistar {
+        height: 30px;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .logo-movistar {
+        height: 35px;
+    }
+    .logo-telefonica{
+        height: 30px
+    }
+}
+@media screen and (min-width: 992px) and (max-width: 1199px){
+    .logo-movistar {
+        height: 30px;
+    }
+    .logo-telefonica{
+        height: 30px
+    }
+}
+/* Movistar & Telefónica Brand */
+
+.movistar h1{ 
+    font-family: "Telefonica" !important;
+    color: #50535a;
+    color: var(--movistar-gunmetal);
+    font-size: 3.5rem;
+    font-weight: 300
+}
+.movistar h2{ 
+    font-family: "Telefonica" !important;
+    color: #50535a;
+    color: var(--movistar-gunmetal);
+    font-size: 1.63em;
+    font-weight: 300;
+}
+.movistar h3{ 
+    font-family: "Telefonica" !important;
+    color: #50535a;
+    color: var(--movistar-gunmetal);
+    font-size: 1.2em;
+}
+.movistar h4{ 
+    font-family: "Telefonica" !important;
+    color: #50535a;
+    color: var(--movistar-gunmetal);
+    font-size: 1em;
+}
+.movistar h5{ 
+    font-family: "Telefonica" !important;
+    color: #50535a;
+    color: var(--movistar-gunmetal);
+    font-size: 1.5em;
+}
+.movistar h6{ 
+    font-family: "Telefonica" !important;
+    color: #50535a;
+    color: var(--movistar-gunmetal);
+    font-size: 2rem;
+}
+.movistar p{
+    font-family: "Telefonica" !important;
+    color: #50535a;
+    line-height: 1.45rem;
+    color: var(--movistar-gunmetal);
+}
+.movistar label {
+    font-family: "Telefonica" !important;
+}
+.movistar .uppercase {
+    text-transform: uppercase!important;
+}
+.txt-white{ 
+    color: #fff!important;
+    color: var(--white)!important;
+}
+/* Buttons */
+.movistar .btn {
+    border-radius: 4px;
+    text-decoration: none;
+    text-transform: none;
+    padding: 0.6em 0.5em;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.9em;
+    border: none;
+    margin: 0.5em;
+    letter-spacing: 0.03em;
+    min-width: 9.5em;
+    cursor: pointer;
+  }
+.movistar .btn-primary {
+    background-color: #5bc500;
+    color: #ffffff;
+  }
+.movistar .btn-primary:hover,
+.movistar .btn-primary:active {
+    background-color: #499e00 !important;
+    color: #ffffff !important;
+}
+.movistar .btn.full {
+    width: 100%;
+    margin: 0.4em 0;
+}
+.movistar .btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+/* Buttons */
+
+/* Forms */
+.movistar .form-control {
+    display: block;
+    width: 100%;
+    padding: 0.8rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #50535a;
+        color: var(--movistar-gunmetal);
+    background-color: #e9eae8;
+    border-color: transparent;
+    background-clip: padding-box;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    -webkit-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.movistar select.form-control:not([size]):not([multiple]) {
+    height: 3.2em;
+}
+
+.movistar .form-control.with-icon{
+    padding-left: 2.5em;
+}
+.movistar .form-group {
+    margin-bottom: 0.9rem;
+    position: relative;
+}
+.movistar .form-group span.icon{
+    position: absolute;
+    left: .9em;
+    top: 2em;
+    height: 1.6em;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    font-size: 1em;
+}
+
+.movistar .form-group span.icon.no-label{
+    top: .9em;
+}
+.movistar .icon {
+    vertical-align: text-bottom;
+    cursor: inherit;
+    line-height: unset!important;
+}
+.movistar .form-group span.icon i{
+    color: #86888c;
+    color: var(--grey-movistar-4);
+    cursor: text !important;
+    font-size: 1.2rem;
+}
+/* Forms */
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 767px){    
+    .movistar h1{
+      font-size: 2rem;
+    }
+}
+
+/* ---------- Mobile ---------- */

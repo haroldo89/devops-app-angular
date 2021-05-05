@@ -21,10 +21,10 @@ export class AddTutorialComponent implements OnInit {
 
   saveTutorial(): void {
     if (this.tutorial.title == null || this.tutorial.title == '') {
-      this.messageAdd = 'validar formato de campos requeridos';
+      this.messageAdd = '*validar formato de campos requeridos';
     }
     else if (this.tutorial.description == null || this.tutorial.description == '') {
-      this.messageAdd = 'validar formato de campos requeridos';
+      this.messageAdd = '*validar formato de campos requeridos';
     }
     else {
       this.tutorialService.create(this.tutorial).then(() => {
@@ -35,6 +35,7 @@ export class AddTutorialComponent implements OnInit {
   }
 
   newTutorial(): void {
+    this.messageAdd = '';
     this.submitted = false;
     this.tutorial = new Tutorial();
   }
