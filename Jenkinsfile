@@ -44,10 +44,10 @@ node {
         }
     }
 
-    stage('Archive artifact') {
-        return
-        archiveArtifacts '*.zip'    
-    }
+    // stage('Archive artifact') {
+    //     return
+    //     archiveArtifacts '*.zip'    
+    // }
     
     stage('Build Docker Image') {
         myapp = docker.build("${IMAGE_TAG}")
