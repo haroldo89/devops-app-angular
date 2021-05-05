@@ -17,9 +17,9 @@ node {
         sh 'npm install'
 	}
 
-    stage('Unit Testing') {
-        sh 'npm run test-ci'
-    }
+    // stage('Unit Testing') {
+    //     sh 'npm run test-ci'
+    // }
 	
 	stage('SonarQube Analysis') {
         def sonarProjectKey = "demo-devops"
