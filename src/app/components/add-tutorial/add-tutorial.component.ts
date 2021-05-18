@@ -20,10 +20,7 @@ export class AddTutorialComponent implements OnInit {
   }
 
   saveTutorial(): void {
-    if (this.tutorial.title == null || this.tutorial.title == '') {
-      this.messageAdd = '*validar formato de campos requeridos';
-    }
-    else if (this.tutorial.description == null || this.tutorial.description == '') {
+    if (this.tutorial.title == null || this.tutorial.title == '' || this.tutorial.description == null || this.tutorial.description == '') {
       this.messageAdd = '*validar formato de campos requeridos';
     }
     else {

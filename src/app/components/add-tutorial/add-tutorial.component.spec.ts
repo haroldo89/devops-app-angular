@@ -42,19 +42,6 @@ describe('AddTutorialComponent', () => {
     expect(service).toBeTruthy();
   });
 
-  it('Debe llamar create() de Add-Tutorial', async(() => {
-    let tutorial = new Tutorial();
-    tutorial.title = 'example';
-    tutorial.description = 'example';
-    component.tutorial = tutorial;
-    // let createTutoria = spyOn(service, 'create');
-    component.tutorialService = service;
-    component.saveTutorial();
-    service.create(component.tutorial)
-    // expect(createTutoria).toHaveBeenCalled()
-    expect(component.messageAdd).toEqual('');
-    expect(component.submitted).toBeFalsy();
-  }))
 
   it('Debe llamar newTutorial() de Add-Tutorial', async(() => {
     component.newTutorial();
