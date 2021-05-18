@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test --browsers=Chrome",
-    "test-ci": "ng test --no-watch --no-progress --browsers=ChromeHeadlessCI",
+    "test-ci": "ng test --no-watch --no-progress --browsers=Chrome",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
