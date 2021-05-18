@@ -20,7 +20,7 @@ node {
     // stage('Unit Testing') {
     //     sh 'npm run test-ci'
     // }
-	
+
 	stage('SonarQube Analysis') {
         def sonarProjectKey = "demo-devops"
         def sonarProjectName = "demo-devops"
@@ -44,15 +44,10 @@ node {
         }
     }
 
-    // stage('Archive artifact') {
-    //     return
-    //     archiveArtifacts '*.zip'    
-    // }
-    
     stage('Build Docker Image') {
         myapp = docker.build("${IMAGE_TAG}")
     }
-    
+
     stage("Push to Google Container Registry") {
         docker.withRegistry('https://us.gcr.io', 'gcr:gke') {
             myapp.push("v1.${IMAGE_VERSION}")
