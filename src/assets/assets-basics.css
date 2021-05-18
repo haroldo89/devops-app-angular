@@ -129,8 +129,8 @@ body {
 .assets p{
     font-family: sans-serif !important;
     color: #50535a;
-    line-height: 1.45rem;
     color: var(--assets-gunmetal);
+    line-height: 1.45rem;
 }
 .assets label {
     font-family: sans-serif !important;
