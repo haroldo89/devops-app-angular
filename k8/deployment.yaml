@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demoangular
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: demoangular
+  template:
+    metadata:
+      labels:
+        app: demoangular
+    spec:
+      containers:
+      - name: demoangular
+        image: haroldo89/demodevops:2
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - name: http-port
+            containerPort: 80
