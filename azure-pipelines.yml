@@ -26,7 +26,10 @@ stages:
       - script: echo ================generate build ================
       - script: echo get dependencies!
       - script: pwd && ls -ls
-      - script: npm run build
+      - task: Npm@1
+        inputs:
+          command: 'custom'
+          customCommand: 'run build'
       - script: pwd && ls -ls
       - script: echo ================finish generate build ================
 - stage: Test
