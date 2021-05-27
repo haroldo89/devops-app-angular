@@ -1,7 +1,7 @@
 trigger:
-- main
+- master
 - dev
-- test
+- uat
 
 pool:
   vmImage: ubuntu-latest
