@@ -28,6 +28,9 @@ stages:
       - script: pwd && ls -ls
       - task: Npm@1
         inputs:
+          command: 'install'
+      - task: Npm@1
+        inputs:
           command: 'custom'
           customCommand: 'run build'
       - script: pwd && ls -ls
