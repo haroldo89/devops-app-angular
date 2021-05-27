@@ -1,22 +1,44 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- master
+- main
+- dev
+- test
 
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo ================get dependencies================
-- script: echo get dependencies!
-    npm install
-- script: pwd && ls -ls
-  displayName: 'Run a one-line script'
-
-- script:
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+stages:
+- stage: Dependencies
+  jobs:
+  - job: getDependencies
+    steps:
+    - script: echo ================get dependencies================
+    - script: echo get dependencies!
+    - script: pwd && ls -ls
+    - task: Npm@1
+      inputs:
+        command: 'install'
+    - script: pwd && ls -ls
+    - script: echo ================ finish get dependencies================
+- stage: Build
+  jobs:
+  - job: Build
+    steps:
+      - script: echo ================generate build ================
+      - script: echo get dependencies!
+      - script: pwd && ls -ls
+      - script: npm run build
+      - script: pwd && ls -ls
+      - script: echo ================finish generate build ================
+- stage: Test
+  jobs:
+  - job: TestOnWindows
+    steps:
+    - script: echo Testing on Windows!
+  - job: TestOnLinux
+    steps:
+    - script: echo Testing on Linux!
+- stage: Deploy
+  jobs:
+  - job: Deploy
+    steps:
+    - script: echo Deploying the code!
