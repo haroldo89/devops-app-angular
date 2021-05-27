@@ -7,34 +7,28 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-- stage: Dependencies
-  jobs:
-  - job: getDependencies
-    steps:
-    - script: echo ================get dependencies================
-    - script: echo get dependencies!
-    - script: pwd && ls -ls
-    - task: Npm@1
-      inputs:
-        command: 'install'
-    - script: pwd && ls -ls
-    - script: echo ================ finish get dependencies================
 - stage: Build
   jobs:
-  - job: Build
+  - job: get-dependencies
+    displayName: get dependencies
     steps:
-      - script: echo ================generate build ================
-      - script: echo get dependencies!
-      - script: pwd && ls -ls
       - task: Npm@1
         inputs:
           command: 'install'
+  - job: build
+    displayName: build
+    steps:
       - task: Npm@1
         inputs:
           command: 'custom'
           customCommand: 'run build'
-      - script: pwd && ls -ls
-      - script: echo ================finish generate build ================
+  - job: unit-test
+    displayName: unit test
+    steps:
+      - task: Npm@1
+        inputs:
+          command: 'custom'
+          customCommand: 'run test-ci'
 - stage: Test
   jobs:
   - job: TestOnWindows
