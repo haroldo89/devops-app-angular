@@ -7,7 +7,7 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-- stage: Build
+- stage: continous_integration
   jobs:
   - job: jb_build_application
     displayName: task's nodejs
@@ -26,9 +26,20 @@ stages:
       - task: Npm@1
         continueOnError: false
         name: ts_unit_test
+        enabled: false
         inputs:
           command: 'custom'
           customCommand: 'run test-ci'
+      - task: SonarQubePreBuild@1
+        continueOnError: false
+        inputs:
+          projectKey: 'angular-azure-devops'
+          projectName: 'angular-azure-devops'
+          projectVersion: '1.0'
+          connectedServiceName: 'sonarqube'
+          includeFullReport: true
+      - task: SonarQubePostTest@1
+        continueOnError: false
 - stage: Test
   jobs:
   - job: TestOnWindows
