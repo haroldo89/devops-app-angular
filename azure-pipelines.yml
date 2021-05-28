@@ -9,25 +9,23 @@ pool:
 stages:
 - stage: Build
   jobs:
-  - job: get_dependencies
-    displayName: get dependencies
+  - job: jb_build_application
+    displayName: task's nodejs
     steps:
       - task: Npm@1
+        name: ts_get_dependencies
+        continueOnError: false
         inputs:
           command: 'install'
-  - job: build
-    displayName: build
-    dependsOn: get_dependencies
-    steps:
       - task: Npm@1
+        continueOnError: false
+        name: ts_build_application
         inputs:
           command: 'custom'
           customCommand: 'run build'
-  - job: unit_test
-    dependsOn: build
-    displayName: unit test
-    steps:
       - task: Npm@1
+        continueOnError: false
+        name: ts_unit_test
         inputs:
           command: 'custom'
           customCommand: 'run test-ci'
