@@ -39,6 +39,8 @@ stages:
           cliProjectKey: 'angular-azure-devops'
           cliProjectName: 'angular-azure-devops'
           cliSources: '.'
+          extraProperties: |
+            -Dsonar.typescript.lcov.reportPaths=$(Build.SourcesDirectory)/coverage/lcov.info
       # Run Code Analysis task
       - task: SonarQubeAnalyze@4
       # Publish Quality Gate Result task
@@ -46,14 +48,12 @@ stages:
         inputs:
           pollingTimeoutSec: '300'
 
-- stage: Test
+- stage: build images
   jobs:
   - job: TestOnWindows
     steps:
     - script: echo Testing on Windows!
-  - job: TestOnLinux
-    steps:
-    - script: echo Testing on Linux!
+
 - stage: Deploy
   jobs:
   - job: Deploy
