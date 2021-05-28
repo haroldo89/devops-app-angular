@@ -30,14 +30,16 @@ stages:
         inputs:
           command: 'custom'
           customCommand: 'run test-ci'
-      - task: SonarQubePreBuild@1
-        continueOnError: false
+      # Prepare Analysis Configuration task
+
+      - task: SonarQubePrepare@4
         inputs:
-          projectKey: 'angular-azure-devops'
-          projectName: 'angular-azure-devops'
-          projectVersion: '1.0'
-          connectedServiceName: 'sonarqube'
-          includeFullReport: true
+          scannerMode: 'CLI'
+          configMode: 'manual'
+          cliProjectKey: 'angular-azure-devops'
+          cliProjectName: 'angular-azure-devops'
+          cliSources: '.'
+        
       - task: SonarQubePostTest@1
         continueOnError: false
 - stage: Test
