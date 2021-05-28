@@ -1,7 +1,5 @@
 trigger:
 - master
-- dev
-- uat
 
 pool:
   vmImage: ubuntu-latest
@@ -30,7 +28,6 @@ stages:
           command: 'custom'
           customCommand: 'run test-ci'
       # Prepare Analysis Configuration task
-
       - task: SonarQubePrepare@4
         inputs:
           SonarQube: 'sonarqube'
