@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -14,6 +15,7 @@ describe('TutorialDetailsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        HttpClientTestingModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireDatabaseModule
       ],
@@ -36,4 +38,5 @@ describe('TutorialDetailsComponent', () => {
   it('debe crear el servicio', () => {
     expect(service).toBeTruthy();
   });
+
 });

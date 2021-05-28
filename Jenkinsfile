@@ -47,7 +47,7 @@ node {
     stage('Build Docker Image') {
         myapp = docker.build("${IMAGE_TAG}")
     }
-    
+
     stage("Push to Google Container Registry") {
         docker.withRegistry('https://us.gcr.io', 'gcr:gke') {
             myapp.push("v1.${IMAGE_VERSION}")

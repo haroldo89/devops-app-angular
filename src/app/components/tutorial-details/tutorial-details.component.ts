@@ -57,7 +57,7 @@ export class TutorialDetailsComponent implements OnInit, OnChanges {
     this.tutorialService.delete(this.currentTutorial.key)
       .then(() => {
         this.refreshList.emit();
-        this.message = 'El item fue actualizado con exito!';
+        this.message = 'El item fue eliminado con exito!';
       })
       .catch(err => console.log(err));
   }

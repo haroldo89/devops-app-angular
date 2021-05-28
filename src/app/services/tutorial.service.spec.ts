@@ -27,7 +27,6 @@ describe('TutorialService', () => {
   it('Debe llamar el metodo getAll() y retornar los items', ()=>{
     service.getAll().snapshotChanges().subscribe((redes)=> {
       expect(redes.length).toBeGreaterThanOrEqual(1)
-      // expect(redes).toEqual(mockResponseRedes)
     })
   })
 
