@@ -4,12 +4,16 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+name: $(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
+
 stages:
 - stage: continous_integration
   jobs:
   - job: jb_build_application
     displayName: task's nodejs
     steps:
+      - script: echo 'el valor del build es = $(Build.BuildNumber)'
+      - script: echo 'el valor del build id es = $(Build.BuildId)'
       - task: Npm@1
         name: ts_get_dependencies
         continueOnError: false
@@ -38,6 +42,7 @@ stages:
           cliSources: '.'
           extraProperties: |
             sonar.typescript.lcov.reportPaths=coverage/lcov.info
+            sonar.projectVersion=$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
       # Run Code Analysis task
       - task: SonarQubeAnalyze@4
       # Publish Quality Gate Result task
@@ -49,13 +54,16 @@ stages:
   jobs:
   - job: docker_tasks
     steps:
-      - task: Docker@2
-        displayName: build_image
-        inputs:
-          containerRegistry: 'docker-haroldo89'
-          repository: 'haroldo89/azure-devops'
-          command: 'build'
-          Dockerfile: '**/Dockerfile'
+      - script: 'docker build -t haroldo89/azure-devops:$(Build.BuildNumber)'
+        name: build_image
+        continueOnError: false
+      # - task: Docker@2
+      #   displayName: build_image
+      #   inputs:
+      #     containerRegistry: 'docker-haroldo89'
+      #     repository: 'haroldo89/azure-devops'
+      #     command: 'build'
+      #     Dockerfile: '**/Dockerfile'
       - task: Docker@2
         displayName: push_image
         inputs:
