@@ -12,8 +12,6 @@ stages:
   - job: jb_build_application
     displayName: task's nodejs
     steps:
-      - script: echo 'el valor del build es = $(Build.BuildNumber)'
-      - script: echo 'el valor del build id es = $(Build.BuildId)'
       - task: Npm@1
         name: ts_get_dependencies
         continueOnError: false
@@ -54,7 +52,7 @@ stages:
   jobs:
   - job: docker_tasks
     steps:
-      - script: 'docker build -t haroldo89/azure-devops:$(Build.BuildNumber)'
+      - script: 'docker build -t haroldo89/azure-devops:$(Build.BuildId)'
         name: build_image
         continueOnError: false
       # - task: Docker@2
