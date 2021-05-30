@@ -37,7 +37,7 @@ stages:
           cliProjectName: 'angular-azure-devops'
           cliSources: '.'
           extraProperties: |
-            -Dsonar.typescript.lcov.reportPaths=$(Build.SourcesDirectory)/coverage/lcov.info
+            sonar.typescript.lcov.reportPaths=coverage/lcov.info
       # Run Code Analysis task
       - task: SonarQubeAnalyze@4
       # Publish Quality Gate Result task
