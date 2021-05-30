@@ -52,7 +52,7 @@ stages:
   jobs:
   - job: docker_tasks
     steps:
-      - script: 'docker build -t haroldo89/azure-devops:$(Build.BuildId)'
+      - script: 'docker build -t haroldo89/azure-devops:$(Build.BuildId) .'
         name: build_image
         continueOnError: false
       # - task: Docker@2
