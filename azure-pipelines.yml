@@ -50,16 +50,17 @@ stages:
   - job: docker_tasks
     steps:
       - task: Docker@2
-        displayName: build_images
+        displayName: build_image
         inputs:
           containerRegistry: 'docker-haroldo89'
-          repository: 'azure-devops'
+          repository: 'haroldo89/azure-devops'
           command: 'build'
           Dockerfile: '**/Dockerfile'
       - task: Docker@2
+        displayName: push_image
         inputs:
           containerRegistry: 'docker-haroldo89'
-          repository: 'azure-devops'
+          repository: 'haroldo89/azure-devops'
           command: 'push'
 
 - stage: Deploy
