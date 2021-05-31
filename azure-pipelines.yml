@@ -35,7 +35,7 @@ stages:
         continueOnError: false
         name: compressing_files
       # copying files in the root folder
-      - script: cp dist/taller/example$(Build.BuildId).zip .
+      - script: cp dist/taller/example$(Build.BuildId).zip . && ls -ltrs
         displayName: copy_files
         continueOnError: false
         name: copy_files
