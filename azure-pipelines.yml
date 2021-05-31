@@ -12,17 +12,24 @@ stages:
   - job: jb_build_application
     displayName: task's nodejs
     steps:
-      - task: Npm@1
+      - script: npm install -f
+        displayName: ts_get_dependencies
         name: ts_get_dependencies
-        continueOnError: false
-        inputs:
-          command: 'install'
+      # - task: Npm@1
+      #   name: ts_get_dependencies
+      #   continueOnError: false
+      #   inputs:
+      #     command: 'install'
       - task: Npm@1
         continueOnError: false
         name: ts_build_application
         inputs:
           command: 'custom'
           customCommand: 'run build'
+      - script: zip -r example$(Build.BuildId).zip dist/taller/*
+        displayName: compressing_files
+        continueOnError: false
+        name: compressing_files
       - task: Npm@1
         continueOnError: false
         name: ts_unit_test
@@ -62,6 +69,7 @@ stages:
       #     repository: 'haroldo89/azure-devops'
       #     command: 'build'
       #     Dockerfile: '**/Dockerfile'
+      - script: docker images
       - task: Docker@2
         displayName: push_image
         inputs:
