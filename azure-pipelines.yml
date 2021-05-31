@@ -30,7 +30,7 @@ stages:
           command: 'custom'
           customCommand: 'run build'
       # generate zip file
-      - script: zip -r example$(Build.BuildId).zip dist/taller/*
+      - script: cd dist/taller && zip -r example$(Build.BuildId).zip *
         displayName: compressing_files
         continueOnError: false
         name: compressing_files
