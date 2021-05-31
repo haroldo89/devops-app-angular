@@ -35,7 +35,7 @@ stages:
         continueOnError: false
         name: compressing_files
       # send file to nexus repository
-      - script: curl -s -u admin:Quevida890q12* --upload-file example$(Build.BuildId).zip $(REPO_BASE_URL)/$(PUBLISH_REPO_URL)/taller/azure/$(Date:yyyyMMdd)-$(Build.BuildId).zip --insecure
+      - script: curl -s -u admin:Quevida890q12* --upload-file example$(Build.BuildId).zip $(REPO_BASE_URL)/$(PUBLISH_REPO_SNAPSHOT_URL)/taller/azure/$(Build.BuildId).zip --insecure
         displayName: send_file_nexus
         name: send_file_nexus
       # Execute unit tesst
