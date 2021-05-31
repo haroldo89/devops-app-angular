@@ -34,6 +34,11 @@ stages:
         displayName: compressing_files
         continueOnError: false
         name: compressing_files
+      # copying files in the root folder
+      - script: cp dist/taller/example$(Build.BuildId).zip .
+        displayName: copy_files
+        continueOnError: false
+        name: copy_files
       # send file to nexus repository
       - script: curl -s -u admin:Quevida890q12* --upload-file example$(Build.BuildId).zip $(REPO_BASE_URL)/$(PUBLISH_REPO_SNAPSHOT_URL)/taller/azure/$(Build.BuildId).zip --insecure
         displayName: send_file_nexus
