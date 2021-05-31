@@ -3,6 +3,13 @@ trigger:
 
 pool:
   vmImage: ubuntu-latest
+  demands:
+
+variables: 
+  - name: REPO_BASE_URL 
+    value: "http://104.197.234.242:8081"
+  - name: PUBLISH_REPO_SNAPSHOT_URL 
+    value: "repository/nodejs-release"
 
 name: $(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
 
@@ -16,11 +23,6 @@ stages:
       - script: npm install -f
         displayName: ts_get_dependencies
         name: ts_get_dependencies
-      # - task: Npm@1
-      #   name: ts_get_dependencies
-      #   continueOnError: false
-      #   inputs:
-      #     command: 'install'
       # generate artifact
       - task: Npm@1
         continueOnError: false
@@ -33,6 +35,10 @@ stages:
         displayName: compressing_files
         continueOnError: false
         name: compressing_files
+      # send file to nexus repository
+      - script: curl -s -u admin:Quevida890q12* --upload-file example$(Build.BuildId).zip ${REPO_BASE_URL}/${PUBLISH_REPO_URL}/taller/azure/$(SourceBranchName)-$(Build.BuildId).zip --insecure
+        displayName: send_file_nexus
+        name: send_file_nexus
       # Execute unit tesst
       - task: Npm@1
         continueOnError: false
