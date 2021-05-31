@@ -3,7 +3,6 @@ trigger:
 
 pool:
   vmImage: ubuntu-latest
-  demands:
 
 variables: 
   - name: REPO_BASE_URL 
