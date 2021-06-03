@@ -1,10 +1,16 @@
 trigger:
 - master
-- dev
-- uat
 
 pool:
   vmImage: ubuntu-latest
+
+variables: 
+  - name: REPO_BASE_URL 
+    value: "http://104.197.234.242:8081"
+  - name: PUBLISH_REPO_SNAPSHOT_URL 
+    value: "repository/nodejs-release"
+
+name: $(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
 
 stages:
 - stage: continous_integration
@@ -12,26 +18,39 @@ stages:
   - job: jb_build_application
     displayName: task's nodejs
     steps:
-      - task: Npm@1
+      # get dependencies
+      - script: npm install -f
+        displayName: ts_get_dependencies
         name: ts_get_dependencies
-        continueOnError: false
-        inputs:
-          command: 'install'
+      # generate artifact
       - task: Npm@1
         continueOnError: false
         name: ts_build_application
         inputs:
           command: 'custom'
           customCommand: 'run build'
+      # generate zip file
+      - script: cd dist/taller && zip -r example$(Build.BuildId).zip *
+        displayName: compressing_files
+        continueOnError: false
+        name: compressing_files
+      # copying files in the root folder
+      - script: cp dist/taller/example$(Build.BuildId).zip . && ls -ltrs
+        displayName: copy_files
+        continueOnError: false
+        name: copy_files
+      # send file to nexus repository
+      - script: curl -s -u admin:Quevida890q12* --upload-file example$(Build.BuildId).zip $(REPO_BASE_URL)/$(PUBLISH_REPO_SNAPSHOT_URL)/taller/azure/$(Build.BuildId).zip --insecure
+        displayName: send_file_nexus
+        name: send_file_nexus
+      # Execute unit tesst
       - task: Npm@1
         continueOnError: false
         name: ts_unit_test
-        enabled: false
         inputs:
           command: 'custom'
           customCommand: 'run test-ci'
       # Prepare Analysis Configuration task
-
       - task: SonarQubePrepare@4
         inputs:
           SonarQube: 'sonarqube'
@@ -40,6 +59,9 @@ stages:
           cliProjectKey: 'angular-azure-devops'
           cliProjectName: 'angular-azure-devops'
           cliSources: '.'
+          extraProperties: |
+            sonar.typescript.lcov.reportPaths=coverage/lcov.info
+            sonar.projectVersion=$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
       # Run Code Analysis task
       - task: SonarQubeAnalyze@4
       # Publish Quality Gate Result task
@@ -47,14 +69,28 @@ stages:
         inputs:
           pollingTimeoutSec: '300'
 
-- stage: Test
+- stage: build_and_push_images
   jobs:
-  - job: TestOnWindows
+  - job: docker_tasks
     steps:
-    - script: echo Testing on Windows!
-  - job: TestOnLinux
-    steps:
-    - script: echo Testing on Linux!
+      - script: 'docker build -t haroldo89/azure-devops:$(Build.BuildId) .'
+        name: build_image
+        continueOnError: false
+      # - task: Docker@2
+      #   displayName: build_image
+      #   inputs:
+      #     containerRegistry: 'docker-haroldo89'
+      #     repository: 'haroldo89/azure-devops'
+      #     command: 'build'
+      #     Dockerfile: '**/Dockerfile'
+      - script: docker images
+      - task: Docker@2
+        displayName: push_image
+        inputs:
+          containerRegistry: 'docker-haroldo89'
+          repository: 'haroldo89/azure-devops'
+          command: 'push'
+
 - stage: Deploy
   jobs:
   - job: Deploy
