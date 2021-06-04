@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-config
+data:
+  ARTIFACT_URL: http://104.197.234.242:8081/repository/nodejs-release/taller/azure/74.zip
+  FILE_NAME_ARTIFACT: 74.zip
