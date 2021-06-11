@@ -1,8 +1,23 @@
+# definicion de ingress sin DNS
 apiVersion: networking.k8s.io/v1beta1 
 kind: Ingress
 metadata:
   name: appangular
 spec:
   backend:
-    serviceName: appangular
+    serviceName: appangular-interna-service
     servicePort: 80
+#---
+# definicion de ingress con DNS
+# apiVersion: networking.k8s.io/v1beta1 
+# kind: Ingress
+# metadata:
+#   name: appangular
+# spec:
+#   rules: 
+#   - host: demodevops.com 
+#     http:
+#       paths:
+#         - backend:
+#             serviceName: appangular-interna-service
+#             servicePort: 80
