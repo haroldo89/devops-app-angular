@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demoangular
+  name: appangular
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: demoangular
+      app: appangular
   template:
     metadata:
       labels:
-        app: demoangular
+        app: appangular
     spec:
       containers:
-      - name: demoangular
+      - name: appangular
         image: haroldo89/demodevops:3
         resources:
           requests:

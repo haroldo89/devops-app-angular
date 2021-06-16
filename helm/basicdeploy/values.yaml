@@ -5,12 +5,13 @@
 replicaCount: 1
 
 image:
-  repository: haroldo89/demodevops
+  repository: us.gcr.io/single-archive-314821/gcf/demodevops
   pullPolicy: Allways
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "2"
+  tag: "1"
 
-imagePullSecrets: []
+imagePullSecrets:
+  - name: regcred
 nameOverride: ""
 fullnameOverride: ""
 
@@ -36,13 +37,21 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-service:
-  type: NodePort
+serviceinternal:
+  name: appangular-internal-service
+  type: ClusterIP
+  port: 80
+  targetPort: 80
+
+servicepublic:
+  name: appangular-public-service
+  type: LoadBalancer
   port: 80
   targetPort: 80
   nodePort: 30200
 
 ingress:
+  name: appangular-public-ingress
   enabled: false
   className: ""
   annotations: {}
@@ -58,11 +67,7 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources: 
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+resources:
   limits:
     cpu: 100m
     memory: 128Mi

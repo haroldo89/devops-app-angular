@@ -1,14 +1,28 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "basicdeploy.fullname" . }}
+  name: {{ .Values.serviceinternal.name }}
   labels:
     {{- include "basicdeploy.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ .Values.serviceinternal.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: 80
-      nodePort: {{ .Values.service.nodePort }}
+    - port: {{ .Values.serviceinternal.port }}
+      targetPort: {{ .Values.serviceinternal.targetPort }}
+  selector:
+    {{- include "basicdeploy.selectorLabels" . | nindent 4 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.servicepublic.name }}
+  labels:
+    {{- include "basicdeploy.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.servicepublic.type }}
+  ports:
+    - port: {{ .Values.servicepublic.port }}
+      targetPort: {{ .Values.servicepublic.targetPort }}
+      nodePort: {{ .Values.servicepublic.nodePort }}
   selector:
     {{- include "basicdeploy.selectorLabels" . | nindent 4 }}
