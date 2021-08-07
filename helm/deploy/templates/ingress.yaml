@@ -1,8 +1,7 @@
-# definicion de ingress sin DNS
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: my-service-ingress
+  name: test-ingress
 spec:
   defaultBackend:
     service:
