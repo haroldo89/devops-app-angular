@@ -19,6 +19,7 @@ import { DialogContentLoaderDialog, LoginComponent } from './components/login/lo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginService } from './services/login.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { TutorialListComponent } from './components/tutorial-list/tutorial-list.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     TutorialDetailsComponent,
     TutorialsListComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    TutorialListComponent
   ],
   imports: [
     MatDialogModule,

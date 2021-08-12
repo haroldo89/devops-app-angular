@@ -21,23 +21,58 @@ const httpOptions = {
 
 export class LoginService {
 
-  private urlLogin = '/api/Login/authenticate';
+  private urlLogin = '/authenticate';
   userValue: UserLogged = null;
+  private httpOptionsHeaders: any;
 
   constructor(private http: HttpClient) { }
 
-  confirmCredentials(logged: UserLogged): Observable<string> {
+  setHeaders() {
+    this.httpOptionsHeaders = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
+      })
+    };
+  }
+
+  confirmCredentialsUser(logged: UserLogged): Observable<any[]> {
     const params = {
-      username: logged.username,
+      email: logged.username,
+      password: logged.password
+    };
+
+    this.setHeaders(); // actualizamos el valor de la cabezera de la peticion
+    // inicio peticion
+    return this.http
+      .post<any[]>( // realizamos la peticion post
+        this.getUrl(this.urlLogin), // se obtiene la url de consulta
+        params,
+        this.httpOptionsHeaders
+      ) // se envian la cabezera
+      .pipe(
+        catchError((error, caught) => {
+          // se captura el error
+          const aTemp = new Observable<any[]>();
+          return aTemp;
+        })
+      ) as Observable<any[]>;
+    // fin peticion
+  }
+
+
+  confirmCredentialsToken(logged: UserLogged): Observable<string> {
+    const params = {
+      email: logged.username,
       password: logged.password
     };
 
     return this.http.post<string>(
-      this.getUrl(this.urlLogin),
-      params,
-      {
-        headers: httpOptions.headers
-      }).pipe(
+      this.getUrl(this.urlLogin), params, { headers: httpOptions.headers })
+      .pipe(
       catchError((error, caught) => {
         console.log(error);
         return '0';

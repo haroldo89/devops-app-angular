@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+<div class="container pt-5">
+  <div class="row">
+    <div class="col-md-4">
+      <h4>Lista de Items</h4>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let notes of notes$; let i = index" [class.active]="i == currentIndex" >
+          {{ notes.title }}
+        </li>
+      </ul>
+    </div>
+    <!-- <div class="col-md-5 px-3 border-left">
+      <div *ngIf="currentTutorial">
+        <app-tutorial-details (refreshList)="refreshList()" [tutorial]="currentTutorial"></app-tutorial-details>
+      </div>
+      <div *ngIf="!currentTutorial">
+        <br />
+        <p>Seleccionar un item...</p>
+      </div>
+    </div> -->
+  </div>
+</div>

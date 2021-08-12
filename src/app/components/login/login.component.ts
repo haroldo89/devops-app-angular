@@ -43,43 +43,68 @@ export class LoginComponent implements OnInit {
       if (this.loginForm.controls.username.valid && this.loginForm.controls.password.valid) {
         this.openDialog();
         this.showDialog = true;
-  
-        if (this.loginForm.controls.username.value === 'hacaicedoto' && this.loginForm.controls.password.value === 'Palo2021*') {
-          const userLogged = new UserLogged();
-          userLogged.name = this.loginForm.controls.username.value;
-          userLogged.password = this.loginForm.controls.password.value;
-          userLogged.securityLevel = 1;
-          this.tok.setTokJwt('item'); // guarda el token en memoria
-          this.tok.setUser(userLogged.name);
-          this.tok.setExpJwt(new Date(1000)); // almacenar fecha de expiracion
-          this.authService.set_User(userLogged);
-          this.closeDialog();
-          this.router.navigate(['/tutorials']);
-        }
-        else {
-          this.closeDialog();
-          this.userNotValid('Favor validar credenciales de acceso');
-        }
-  
-        
+        const loginInfo = {
+          id: 0,
+          name: '',
+          username: this.loginForm.controls.username.value,
+          password: this.loginForm.controls.password.value,
+          securityLevel: 0
+        };
+
+        this.authService
+        .confirmCredentialsUser(loginInfo as UserLogged)
+        .subscribe(item => {
+          this.showDialog = false;
+          console.log(item);
+          if (item) {
+            const formValue = this.loginForm.value as UserLogged;
+            this.tok.setUsername(formValue.username);
+            this.userValid(item);
+          } else {
+            this.closeDialog();
+            this.loginForm.reset();
+            this.userNotValid('Favor validar credenciales de acceso');
+          }
+        });
       } else {
         this.openSnackBar('formulario invalido, favor validar', 'reintentar');
       }
     }
+
+    // login(): void {
+    //   if (this.loginForm.controls.username.valid && this.loginForm.controls.password.valid) {
+    //     this.openDialog();
+    //     this.showDialog = true;
+  
+    //     if (this.loginForm.controls.username.value === 'hacaicedoto' && this.loginForm.controls.password.value === 'Palo2021*') {
+    //       const userLogged = new UserLogged();
+    //       userLogged.name = this.loginForm.controls.username.value;
+    //       userLogged.password = this.loginForm.controls.password.value;
+    //       userLogged.securityLevel = 1;
+    //       this.tok.setTokJwt('item'); // guarda el token en memoria
+    //       this.tok.setUser(userLogged.name);
+    //       this.tok.setExpJwt(new Date(1000)); // almacenar fecha de expiracion
+    //       this.authService.set_User(userLogged);
+    //       this.closeDialog();
+    //       this.router.navigate(['/tutorials']);
+    //     }
+    //     else {
+    //       this.closeDialog();
+    //       this.userNotValid('Favor validar credenciales de acceso');
+    //     }
+  
+        
+    //   } else {
+    //     this.openSnackBar('formulario invalido, favor validar', 'reintentar');
+    //   }
+    // }
   
     userValid(item: any) {
-      const userLogged = new UserLogged();
-      const x = item.split('.', 3);
-      const data = JSON.parse(atob(x[1]));
-      userLogged.securityLevel = data.role;
-      userLogged.username = data.unique_name;
-      // console.log(data);
-      this.tok.setTokJwt(item); // guarda el token en memoria
-      this.tok.setUser(data.primarysid);
-      this.tok.setExpJwt(new Date(data.exp * 1000)); // almacenar fecha de expiracion
-      this.authService.set_User(userLogged);
+      console.log(item.token);
+      this.tok.setTokJwt(item.token); // guarda el token en memoria
+      this.tok.setUser(item.email);
       this.closeDialog();
-      this.router.navigate(['/home']);
+      this.router.navigate(['/tutorial']);
     }
   
     userNotValid(mensaje: string) {
