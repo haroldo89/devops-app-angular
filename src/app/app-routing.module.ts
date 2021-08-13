@@ -4,6 +4,7 @@ import { TutorialsListComponent } from './components/tutorials-list/tutorials-li
 import { AddTutorialComponent } from './components/add-tutorial/add-tutorial.component';
 import { LoginComponent } from './components/login/login.component';
 import { TutorialListComponent } from './components/tutorial-list/tutorial-list.component';
+import { AddNoteComponent } from './components/add-note/add-note.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'add',
     component: AddTutorialComponent
+  },
+  {
+    path: 'add-note',
+    component: AddNoteComponent
   }
 ];
 

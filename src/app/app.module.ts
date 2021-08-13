@@ -20,6 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginService } from './services/login.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TutorialListComponent } from './components/tutorial-list/tutorial-list.component';
+import { TutorialDetailComponent } from './components/tutorial-detail/tutorial-detail.component';
+import { AddNoteComponent } from './components/add-note/add-note.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { TutorialListComponent } from './components/tutorial-list/tutorial-list.
     TutorialsListComponent,
     LoginComponent,
     NavbarComponent,
-    TutorialListComponent
+    TutorialListComponent,
+    TutorialDetailComponent,
+    AddNoteComponent
   ],
   imports: [
     MatDialogModule,

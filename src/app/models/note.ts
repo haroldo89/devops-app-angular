@@ -1,12 +1,13 @@
 export default class Note {
-    key: string;
+    _id: string;
     title: string;
     content: string;
-    published = false;
+    published: boolean;
   
     constructor() {
       this.title = '';
-      this.content = ''
+      this.content = '';
+      this.published = false;
     }
   
   }

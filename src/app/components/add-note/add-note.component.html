@@ -1,0 +1,24 @@
+<app-navbar></app-navbar>
+<div class="container pt-5">
+  <div class="col-md-5">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="title">Titulo</label>
+        <input type="text" class="form-control" id="title" required minlength="1" [(ngModel)]="note.title" name="title" />
+      </div>
+  
+      <div class="form-group">
+        <label for="description">Contenido</label>
+        <input class="form-control" id="content" required [(ngModel)]="note.content" name="contenido" />
+      </div>
+    
+      <button (click)="saveNote()" class="btn btn-success">Crear</button>
+      <p class="p-5">{{ messageAdd }}</p>
+    </div>
+  
+    <div *ngIf="submitted">
+      <h4>Item creado!</h4>
+      <button class="btn btn-success" (click)="newNote()">Nuevo Item</button>
+    </div>
+  </div>
+</div>

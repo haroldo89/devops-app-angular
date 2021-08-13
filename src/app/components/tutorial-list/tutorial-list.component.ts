@@ -12,8 +12,8 @@ export class TutorialListComponent implements OnInit {
 
   notes$: Note[];
   currentIndex = -1;
+  currentNote = null;
   constructor(
-    public tutorialService: TutorialService,
     public noteService: NoteService
   ) { }
 
@@ -27,5 +27,15 @@ export class TutorialListComponent implements OnInit {
       .subscribe(res => (this.notes$ = res as Note[]));
   }
 
+  setActiveNote(note, index): void {
+    this.currentNote = note;
+    this.currentIndex = index;
+  }
+
+  refreshList(): void {
+    this.currentNote = null;
+    this.currentIndex = -1;
+    this.getNotes();
+  }
 
 }

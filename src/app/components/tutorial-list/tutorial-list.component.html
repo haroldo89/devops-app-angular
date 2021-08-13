@@ -4,19 +4,19 @@
     <div class="col-md-4">
       <h4>Lista de Items</h4>
       <ul class="list-group">
-        <li class="list-group-item" *ngFor="let notes of notes$; let i = index" [class.active]="i == currentIndex" >
-          {{ notes.title }}
+        <li class="list-group-item" *ngFor="let note of notes$; let i = index" [class.active]="i == currentIndex" (click)="setActiveNote(note, i)" >
+          {{ note.title }}
         </li>
       </ul>
     </div>
-    <!-- <div class="col-md-5 px-3 border-left">
-      <div *ngIf="currentTutorial">
-        <app-tutorial-details (refreshList)="refreshList()" [tutorial]="currentTutorial"></app-tutorial-details>
+    <div class="col-md-5 px-3 border-left">
+      <div *ngIf="currentNote">
+        <app-tutorial-detail (refreshList)="refreshList()" [note]="currentNote"></app-tutorial-detail>
       </div>
-      <div *ngIf="!currentTutorial">
+      <div *ngIf="!currentNote">
         <br />
         <p>Seleccionar un item...</p>
       </div>
-    </div> -->
+    </div>
   </div>
 </div>
