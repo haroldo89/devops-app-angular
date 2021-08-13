@@ -14,8 +14,8 @@ import { TokenService } from './token.service';
 export class NoteService {
 
   private urlCreateNote = '/notes/createNote';
-  private urlDeleteTutorial = '/deleteDesignCollaboratorIdea';
-  private urlUpdateTutorial = '/notes/updateNote';
+  private urlDeleteNote = '/notes/deleteNote';
+  private urlUpdateNote = '/notes/updateNote';
   private urlGetNote = '/notes/getNote';
   private urlGetNotes = '/notes/getAll';
   userValue: UserLogged = null;
@@ -108,7 +108,7 @@ export class NoteService {
     // fin peticion
   }
 
-  update(note: Note): Observable<string> {
+  update(note: Note): Observable<any[]> {
     this.setHeaders(); // actualizamos el valor de la cabezera de la peticion
     const params = {
       noteId: note._id,
@@ -118,37 +118,41 @@ export class NoteService {
     };
     // inicio peticion
     return this.http
-      .post<string>( // realizamos la peticion post
-        this.getUrl(this.urlUpdateTutorial), // se obtiene la url de consulta
+      .post<any[]>( // realizamos la peticion post
+        this.getUrl(this.urlUpdateNote), // se obtiene la url de consulta
         params,
         this.httpOptions
       ) // se envian la cabezera
       .pipe(
         catchError((error, caught) => {
+          error = error as Observable<any[]>
           // se captura el error
           return error;
         })
-      ) as Observable<string>;
+      ) as Observable<any[]>;
     // fin peticion
   }
 
    // funcion para eliminar una tarea en etapa de diseño.
-   delete(idea: Tutorial): Observable<string> {
+   delete(note: Note): Observable<any[]> {
     this.setHeaders(); // actualizamos el valor de la cabezera de la peticion
-    const params = idea;
+    const params = {
+      noteId: note._id
+    };
     // inicio peticion
     return this.http
-      .post<string>( // realizamos la peticion post
-      this.getUrl(this.urlDeleteTutorial), // se obtiene la url de consulta
+      .post<any[]>( // realizamos la peticion post
+      this.getUrl(this.urlDeleteNote), // se obtiene la url de consulta
       params,
       this.httpOptions
     ) // se envian la cabezera
     .pipe(
       catchError((error, caught) => {
+        error = error as Observable<any[]>
           // se captura el error
           return error;
         })
-      ) as Observable<string>;
+      ) as Observable<any[]>;
     // fin peticion
   }
 

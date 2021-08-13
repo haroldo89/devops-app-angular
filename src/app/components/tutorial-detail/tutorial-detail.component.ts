@@ -25,12 +25,16 @@ export class TutorialDetailComponent implements OnInit {
   }
 
   updatePublished(status): void {
-    // this.noteService.update(this.currentNote._id, { published: status })
-    //   .then(() => {
-    //     this.currentNote.published = status;
-    //     this.message = 'El estado fue actualizado con exito!';
-    //   })
-    //   .catch(err => console.log(err));
+    const params = {
+      _id: this.currentNote._id,
+      title: this.currentNote.title,
+      content: this.currentNote.content,
+      published: status 
+    }
+    this.noteService.update(params).subscribe(item => {
+      this.currentNote.published = status;
+      this.message = 'El estado fue actualizado con exito!';
+    });
   }
 
   updateTutorial(): void {
@@ -51,12 +55,10 @@ export class TutorialDetailComponent implements OnInit {
   }
 
   deleteTutorial(): void {
-    // this.noteService.delete(this.currentNote.key)
-    //   .then(() => {
-    //     this.refreshList.emit();
-    //     this.message = 'El item fue eliminado con exito!';
-    //   })
-    //   .catch(err => console.log(err));
+    this.noteService.delete(this.currentNote).subscribe(item => {
+      this.refreshList.emit();
+      this.message = 'El item fue eliminado con exito!';
+    });
   }
 
 }
