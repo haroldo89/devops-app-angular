@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: appangular
-        image: haroldo89/demo-ingress-ang:1
+        image: haroldo89/demo-ingress-ang:3
         resources:
           requests:
             memory: "64Mi"
