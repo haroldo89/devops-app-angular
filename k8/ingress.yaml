@@ -2,10 +2,11 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: my-service-ingress
+  name: my-ingress-angular
 spec:
   defaultBackend:
     service:
       name: appangular-internal-service
       port:
         number: 80
+  ingressClassName: nginx
