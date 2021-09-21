@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: appangular
+  name: app-angular
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: appangular
+      app: app-angular
   template:
     metadata:
       labels:
-        app: appangular
+        app: app-angular
     spec:
       containers:
       - name: appangular
-        image: haroldo89/demo-ingress-ang:5
+        image: haroldo89/demo-ingress-ang:8
         resources:
           requests:
             memory: "64Mi"

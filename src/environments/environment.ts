@@ -1,7 +1,8 @@
 export const environment = {
   production: false,
   // baseUrl: 'http://localhost:59577',
-  baseUrl: 'http://localhost:8080',
+  // baseUrl: 'http://localhost:8080',
+  baseUrl: 'http://service-internal-nodejs',
   firebase: {
     apiKey: "AIzaSyCoREraro7lV8tzCNZ-QAYbuJY47pG0XxY",
     authDomain: "fir-devops-2cdb4.firebaseapp.com",
