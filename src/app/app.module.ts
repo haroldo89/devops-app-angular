@@ -10,7 +10,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, ArrayOfComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddTutorialComponent } from './components/add-tutorial/add-tutorial.component';
 import { TutorialDetailsComponent } from './components/tutorial-details/tutorial-details.component';
@@ -34,7 +34,8 @@ import { AddNoteComponent } from './components/add-note/add-note.component';
     NavbarComponent,
     TutorialListComponent,
     TutorialDetailComponent,
-    AddNoteComponent
+    AddNoteComponent,
+    ArrayOfComponents
   ],
   imports: [
     MatDialogModule,

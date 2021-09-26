@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TutorialsListComponent } from './components/tutorials-list/tutorials-list.component';
 import { AddTutorialComponent } from './components/add-tutorial/add-tutorial.component';
@@ -7,9 +7,10 @@ import { TutorialListComponent } from './components/tutorial-list/tutorial-list.
 import { AddNoteComponent } from './components/add-note/add-note.component';
 
 const routes: Routes = [
+  // { path: '', redirectTo: 'front', pathMatch: 'full' },
   {
-    path: '',
-    component: LoginComponent
+    path: 'front',
+    component: LoginComponent,
   },
   {
     path: 'tutorial',
@@ -34,3 +35,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+export const ArrayOfComponents = [TutorialListComponent,
+  TutorialsListComponent, AddTutorialComponent, AddNoteComponent]

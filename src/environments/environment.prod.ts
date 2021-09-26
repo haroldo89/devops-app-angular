@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   // baseUrl: 'http://localhost:59577',
-  baseUrl: 'http://service-internal-nodejs',
+  baseUrl: 'http://localhost/api',
   firebase: {
     apiKey: "AIzaSyC8RKGRyLF7DC30xWeWHeGkrW1KzODDGak",
     authDomain: "taller-f6380.firebaseapp.com",
