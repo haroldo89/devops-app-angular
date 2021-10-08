@@ -6,7 +6,7 @@ pool:
 
 variables: 
   - name: REPO_BASE_URL 
-    value: "http://104.197.234.242:8081"
+    value: "http://52.154.74.192/:8081"
   - name: PUBLISH_REPO_SNAPSHOT_URL 
     value: "repository/nodejs-release"
 
@@ -19,7 +19,7 @@ stages:
     displayName: task's nodejs
     steps:
       # get dependencies
-      - script: npm install -f
+      - script: npm install
         displayName: ts_get_dependencies
         name: ts_get_dependencies
       # generate artifact
@@ -40,9 +40,9 @@ stages:
         continueOnError: false
         name: copy_files
       # send file to nexus repository
-      - script: curl -s -u admin:Quevida890q12* --upload-file example$(Build.BuildId).zip $(REPO_BASE_URL)/$(PUBLISH_REPO_SNAPSHOT_URL)/taller/azure/$(Build.BuildId).zip --insecure
-        displayName: send_file_nexus
-        name: send_file_nexus
+      # - script: curl -s -u admin:Quevida890q12* --upload-file example$(Build.BuildId).zip $(REPO_BASE_URL)/$(PUBLISH_REPO_SNAPSHOT_URL)/taller/azure/$(Build.BuildId).zip --insecure
+      #   displayName: send_file_nexus
+      #   name: send_file_nexus
       # Execute unit tesst
       - task: Npm@1
         continueOnError: false
