@@ -111,13 +111,13 @@ stages:
           command: 'buildAndPush'
           Dockerfile: '**/Dockerfile'
           tags:  $(Build.BuildId)
-  - job: artifact
-    displayName: publish artifact
-    dependsOn: docker_tasks
-    condition: succeeded()
-    steps:
-      - task: PublishBuildArtifacts@1
-        inputs:
-          PathtoPublish: 'dist/taller/example$(Build.BuildId).zip'
-          ArtifactName: 'example$(Build.BuildId).zip'
-          publishLocation: 'Container'
+  # - job: artifact
+  #   displayName: publish artifact
+  #   dependsOn: docker_tasks
+  #   condition: succeeded()
+  #   steps:
+  #     - task: PublishBuildArtifacts@1
+  #       inputs:
+  #         PathtoPublish: 'dist/taller/example$(Build.BuildId).zip'
+  #         ArtifactName: 'example$(Build.BuildId).zip'
+  #         publishLocation: 'Container'
