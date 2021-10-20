@@ -24,7 +24,7 @@ name: $(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
 stages:
 - stage: continous_integration
   jobs:
-  - job: jb_build_application
+  - job: build_application
     displayName: task's nodejs
     steps:
       # get dependencies
@@ -85,9 +85,6 @@ stages:
       - task: SonarQubePublish@4
         inputs:
           pollingTimeoutSec: '300'
-
-- stage: build_and_push_images
-  jobs:
   - job: docker_tasks
     steps:
       # - script: 'docker build -t haroldo89/azure-devops:$(Build.BuildId) .'
@@ -117,9 +114,6 @@ stages:
           command: 'buildAndPush'
           Dockerfile: '**/Dockerfile'
           tags:  $(Build.BuildId)
-
-- stage: Deploy
-  jobs:
   - job: Deploy
     steps:
      - task: CopyPublishBuildArtifacts@1
@@ -129,3 +123,5 @@ stages:
          ArtifactName: 'hacaicedoto'
          ArtifactType: 'Container'
      - script: echo Deploying the code!
+
+  
