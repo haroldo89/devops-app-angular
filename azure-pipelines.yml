@@ -23,6 +23,7 @@ name: $(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
 
 stages:
 - stage: continous_integration
+  displayName: continuos integration
   jobs:
   - job: build_application
     displayName: task's nodejs
@@ -86,24 +87,20 @@ stages:
         inputs:
           pollingTimeoutSec: '300'
   - job: docker_tasks
+    displayName: docker tasks
+    dependsOn: build_application
+    condition: succeeded()
     steps:
       # - script: 'docker build -t haroldo89/azure-devops:$(Build.BuildId) .'
       #   name: build_image
       #   continueOnError: false
       - task: Docker@2
-        displayName: build_image
+        displayName: build_push_image_gcp
         inputs:
           containerRegistry: 'docker-haroldo89'
           repository: 'haroldo89/azure-devops'
-          tags: $(Build.BuildId)
-          command: 'build'
+          command: 'buildAndPush'
           Dockerfile: '**/Dockerfile'
-      - task: Docker@2
-        displayName: push_image
-        inputs:
-          containerRegistry: 'docker-haroldo89'
-          repository: 'haroldo89/azure-devops'
-          command: 'push'
           tags:  $(Build.BuildId)
 
       - task: Docker@2
@@ -114,14 +111,17 @@ stages:
           command: 'buildAndPush'
           Dockerfile: '**/Dockerfile'
           tags:  $(Build.BuildId)
-  - job: Deploy
-    steps:
-     - task: CopyPublishBuildArtifacts@1
-       inputs:
-         CopyRoot: 'dist/taller/example$(Build.BuildId).zip'
-         Contents: '*'
-         ArtifactName: 'hacaicedoto'
-         ArtifactType: 'Container'
-     - script: echo Deploying the code!
-
   
+- stage: continous_integration
+  displayName: continuos integration
+  condition: succeeded()
+  dependsOn: continous_integration
+  jobs: 
+  - job: artifact
+    displayName: publish artifact
+    steps:
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: 'dist/taller/example$(Build.BuildId).zip'
+          ArtifactName: 'example$(Build.BuildId).zip'
+          publishLocation: 'Container'
