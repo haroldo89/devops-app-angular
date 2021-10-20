@@ -109,6 +109,15 @@ stages:
           command: 'push'
           tags:  $(Build.BuildId)
 
+      - task: Docker@2
+        displayName: build_push_image_gcp
+        inputs:
+          containerRegistry: 'gcr-tutorial'
+          repository: 'gcr/azure-devops'
+          command: 'buildAndPush'
+          Dockerfile: '**/Dockerfile'
+          tags:  $(Build.BuildId)
+
 - stage: Deploy
   jobs:
   - job: Deploy
