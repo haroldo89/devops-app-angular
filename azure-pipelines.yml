@@ -112,8 +112,8 @@ stages:
           Dockerfile: '**/Dockerfile'
           tags:  $(Build.BuildId)
   
-- stage: continous_integration
-  displayName: continuos integration
+- stage: artifactoring
+  displayName: artifactoring
   condition: succeeded()
   dependsOn: continous_integration
   jobs: 
