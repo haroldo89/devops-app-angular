@@ -111,14 +111,10 @@ stages:
           command: 'buildAndPush'
           Dockerfile: '**/Dockerfile'
           tags:  $(Build.BuildId)
-  
-- stage: artifactoring
-  displayName: artifactoring
-  condition: succeeded()
-  dependsOn: continous_integration
-  jobs: 
   - job: artifact
     displayName: publish artifact
+    dependsOn: docker_tasks
+    condition: succeeded()
     steps:
       - task: PublishBuildArtifacts@1
         inputs:
