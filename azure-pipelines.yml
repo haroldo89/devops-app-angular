@@ -7,7 +7,7 @@ pool:
 variables: 
   - group: jfrog-artifactory
   - name: key-jfrog
-    value: $[variables.key-secret]
+    value: $[variables.key]
 
   - name: REPO_BASE_URL 
     value: "http://52.154.74.192/:8081"
