@@ -5,10 +5,19 @@ pool:
   vmImage: ubuntu-latest
 
 variables: 
+  - group: jfrog-artifactory
+  - name: key-jfrog
+    value: $[variables.key]
+
   - name: REPO_BASE_URL 
     value: "http://52.154.74.192/:8081"
   - name: PUBLISH_REPO_SNAPSHOT_URL 
     value: "repository/nodejs-release"
+  
+  - name: JFROG_REPO_BASE_URL 
+    value: "http://34.68.201.128:8082/artifactory"
+  - name: JFROG_PUBLISH_REPO_SNAPSHOT_URL 
+    value: "devops/repository/nodejs-release"
 
 name: $(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
 
@@ -39,10 +48,17 @@ stages:
         displayName: copy_files
         continueOnError: false
         name: copy_files
+      
       # send file to nexus repository
       # - script: curl -s -u admin:Quevida890q12* --upload-file example$(Build.BuildId).zip $(REPO_BASE_URL)/$(PUBLISH_REPO_SNAPSHOT_URL)/taller/azure/$(Build.BuildId).zip --insecure
       #   displayName: send_file_nexus
       #   name: send_file_nexus
+
+      # send file to jfrog repository
+      - script: curl -u admin:$(key-jfrog) -X PUT "$(JFROG_REPO_BASE_URL)/$(JFROG_PUBLISH_REPO_SNAPSHOT_URL)/$(Build.BuildId).zip" -T example$(Build.BuildId).zip
+        displayName: send files to jfrog artifactory
+        name: send_files_jfrog
+      
       # Execute unit tesst
       # - task: Npm@1
       #   continueOnError: false
@@ -50,6 +66,7 @@ stages:
       #   inputs:
       #     command: 'custom'
       #     customCommand: 'run test-ci'
+      
       # Prepare Analysis Configuration task
       - task: SonarQubePrepare@4
         inputs:
