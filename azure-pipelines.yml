@@ -113,7 +113,7 @@ stages:
         displayName: build_push_image_gcp
         inputs:
           containerRegistry: 'gcr-tutorial'
-          repository: 'gcr/azure-devops'
+          repository: 'xenon-hub-327616/azure-devops'
           command: 'buildAndPush'
           Dockerfile: '**/Dockerfile'
           tags:  $(Build.BuildId)
