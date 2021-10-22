@@ -8,11 +8,15 @@ variables:
   - group: jfrog-artifactory
   - name: key-jfrog
     value: $[variables.key]
+  - name: url-jfrog
+    value: $[variables.url]
+  - name: repo-front-jfrog
+    value: $[variables.artifactory_front]
 
-  - name: JFROG_REPO_BASE_URL 
-    value: "http://35.192.134.124:8082/artifactory"
-  - name: JFROG_PUBLISH_REPO_SNAPSHOT_URL 
-    value: "devops/repository/nodejs-release"
+  # - name: JFROG_REPO_BASE_URL 
+  #   value: "http://35.192.134.124:8082/artifactory"
+  # - name: JFROG_PUBLISH_REPO_SNAPSHOT_URL 
+  #   value: "devops/repository/nodejs-release"
 
 name: $(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
 
@@ -51,7 +55,7 @@ stages:
       #   name: send_file_nexus
 
       # send file to jfrog repository
-      - script: curl -u admin:$(key-jfrog) -X PUT "$(JFROG_REPO_BASE_URL)/$(JFROG_PUBLISH_REPO_SNAPSHOT_URL)/$(Build.BuildId).zip" -T example$(Build.BuildId).zip
+      - script: curl -u admin:$(key-jfrog) -X PUT "$(url-jfrog)/$(repo-front-jfrog)/$(Build.BuildId).zip" -T example$(Build.BuildId).zip
         displayName: send files to jfrog artifactory
         name: send_files_jfrog
       
