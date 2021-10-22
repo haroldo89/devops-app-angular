@@ -58,6 +58,7 @@ stages:
       - script: curl -u admin:$(key-jfrog) -X PUT "$(url-jfrog)/$(repo-front-jfrog)/$(Build.BuildId).zip" -T example$(Build.BuildId).zip
         displayName: send files to jfrog artifactory
         name: send_files_jfrog
+        continueOnError: false
       
       # Execute unit tesst
       # - task: Npm@1
