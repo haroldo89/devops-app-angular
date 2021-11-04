@@ -1,22 +1,20 @@
 @charset "UTF-8";
 
 @font-face {
-  font-family: "movistar";
-  src:url("../fonts/movistar.eot");
-  src:url("../fonts/movistar.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/movistar.woff") format("woff"),
-    url("../fonts/movistar.ttf") format("truetype"),
-    url("../fonts/movistar.svg#movistar") format("svg");
+  font-family: "classic";
+  src:url("../fonts/classic.eot");
+  src:url("../fonts/classic.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/classic.woff") format("woff"),
+    url("../fonts/classic.ttf") format("truetype"),
+    url("../fonts/classic.svg#movistar") format("svg");
   font-weight: normal;
   font-style: normal;
-
 }
 /*------------------------
 	base class definition
 -------------------------*/
-.telefonica .icon {
+.classic .icon {
   display: inline-block;
-  speak: none;
   text-transform: none;
   /* Better Font Rendering */
   -webkit-font-smoothing: antialiased;
@@ -26,50 +24,50 @@
   change icon size
 -------------------------*/
 /* relative units */
-.telefonica .icon-sm {
+.classic .icon-sm {
   font-size: 0.8em;
 }
-.telefonica .icon-lg {
+.classic .icon-lg {
   font-size: 1.2em;
 }
 /* absolute units */
-.telefonica .icon-16 {
+.classic .icon-16 {
   font-size: 16px;
 }
-.telefonica .icon-32 {
+.classic .icon-32 {
   font-size: 32px;
 }
 /*----------------------------------
   add a square/circle background
 -----------------------------------*/
-.telefonica .icon-bg-square,
-.telefonica .icon-bg-circle {
+.classic .icon-bg-square,
+.classic .icon-bg-circle {
   padding: 0.35em;
   background-color: #eee;
 }
-.telefonica .icon-bg-circle {
+.classic .icon-bg-circle {
   border-radius: 50%;
 }
 /*------------------------------------
   use icons as list item markers
 -------------------------------------*/
-.telefonica .icon-ul {
+.classic .icon-ul {
   padding-left: 0;
   list-style-type: none;
 }
-.telefonica .icon-ul > li {
+.classic .icon-ul > li {
   display: flex;
   align-items: flex-start;
   line-height: 1.4;
 }
-.telefonica .icon-ul > li > .icon {
+.classic .icon-ul > li > .icon {
   margin-right: 0.4em;
   line-height: inherit;
 }
 /*------------------------
   spinning icons
 -------------------------*/
-.telefonica .icon-is-spinning {
+.classic .icon-is-spinning {
   -webkit-animation: icon-spin 2s infinite linear;
   -moz-animation: icon-spin 2s infinite linear;
   animation: icon-spin 2s infinite linear;
@@ -109,7 +107,7 @@
 /*------------------------
   rotated/flipped icons
 -------------------------*/
-.telefonica .icon-rotate-90 {
+.classic .icon-rotate-90 {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
@@ -117,7 +115,7 @@
   -o-transform: rotate(90deg);
   transform: rotate(90deg);
 }
-.telefonica .icon-rotate-180 {
+.classic .icon-rotate-180 {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
@@ -125,7 +123,7 @@
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
 }
-.telefonica .icon-rotate-270 {
+.classic .icon-rotate-270 {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
   -webkit-transform: rotate(270deg);
   -moz-transform: rotate(270deg);
@@ -133,7 +131,7 @@
   -o-transform: rotate(270deg);
   transform: rotate(270deg);
 }
-.telefonica .icon-flip-y {
+.classic .icon-flip-y {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
   -webkit-transform: scale(-1, 1);
   -moz-transform: scale(-1, 1);
@@ -141,7 +139,7 @@
   -o-transform: scale(-1, 1);
   transform: scale(-1, 1);
 }
-.telefonica .icon-flip-x {
+.classic .icon-flip-x {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
   -webkit-transform: scale(1, -1);
   -moz-transform: scale(1, -1);
@@ -153,7 +151,7 @@
 	icons
 -------------------------*/
 [data-icon]:before {
-  font-family: "movistar" !important;
+  font-family: "classic" !important;
   content: attr(data-icon);
   font-style: normal !important;
   font-weight: normal !important;
@@ -167,7 +165,7 @@
 
 [class^="icon-"]:before,
 [class*=" icon-"]:before {
-  font-family: "movistar" !important;
+  font-family: "classic" !important;
   font-style: normal !important;
   font-weight: normal !important;
   font-variant: normal !important;
