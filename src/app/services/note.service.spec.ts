@@ -12,10 +12,12 @@ describe('NoteService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      AngularFireModule.initializeApp(environment.firebase),
-      AngularFireDatabaseModule,
-      HttpClient,
-      TokenService
+      imports: [
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireDatabaseModule,
+        HttpClient,
+        TokenService
+      ]
     });
     service = TestBed.inject(NoteService);
   });
