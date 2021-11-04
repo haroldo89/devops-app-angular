@@ -5,21 +5,30 @@ pool:
   vmImage: ubuntu-latest
 
 variables: 
-  - name: REPO_BASE_URL 
-    value: "http://104.197.234.242:8081"
-  - name: PUBLISH_REPO_SNAPSHOT_URL 
-    value: "repository/nodejs-release"
+  - group: jfrog-artifactory
+  - name: key-jfrog
+    value: $[variables.key]
+  - name: url-jfrog
+    value: $[variables.url]
+  - name: repo-front-jfrog
+    value: $[variables.artifactory_front]
+
+  # - name: JFROG_REPO_BASE_URL 
+  #   value: "http://35.192.134.124:8082/artifactory"
+  # - name: JFROG_PUBLISH_REPO_SNAPSHOT_URL 
+  #   value: "devops/repository/nodejs-release"
 
 name: $(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
 
 stages:
 - stage: continous_integration
+  displayName: continuos integration
   jobs:
-  - job: jb_build_application
+  - job: build_application
     displayName: task's nodejs
     steps:
       # get dependencies
-      - script: npm install -f
+      - script: npm install
         displayName: ts_get_dependencies
         name: ts_get_dependencies
       # generate artifact
@@ -39,17 +48,26 @@ stages:
         displayName: copy_files
         continueOnError: false
         name: copy_files
+      
       # send file to nexus repository
-      - script: curl -s -u admin:Quevida890q12* --upload-file example$(Build.BuildId).zip $(REPO_BASE_URL)/$(PUBLISH_REPO_SNAPSHOT_URL)/taller/azure/$(Build.BuildId).zip --insecure
-        displayName: send_file_nexus
-        name: send_file_nexus
-      # Execute unit tesst
-      - task: Npm@1
+      # - script: curl -s -u admin:Quevida890q12* --upload-file example$(Build.BuildId).zip $(REPO_BASE_URL)/$(PUBLISH_REPO_SNAPSHOT_URL)/taller/azure/$(Build.BuildId).zip --insecure
+      #   displayName: send_file_nexus
+      #   name: send_file_nexus
+
+      # send file to jfrog repository
+      - script: curl -u admin:$(key-jfrog) -X PUT "$(url-jfrog)/$(repo-front-jfrog)/$(Build.BuildId).zip" -T example$(Build.BuildId).zip
+        displayName: send files to jfrog artifactory
+        name: send_files_jfrog
         continueOnError: false
-        name: ts_unit_test
-        inputs:
-          command: 'custom'
-          customCommand: 'run test-ci'
+      
+      # Execute unit tesst
+      # - task: Npm@1
+      #   continueOnError: false
+      #   name: ts_unit_test
+      #   inputs:
+      #     command: 'custom'
+      #     customCommand: 'run test-ci'
+      
       # Prepare Analysis Configuration task
       - task: SonarQubePrepare@4
         inputs:
@@ -68,31 +86,28 @@ stages:
       - task: SonarQubePublish@4
         inputs:
           pollingTimeoutSec: '300'
-
-- stage: build_and_push_images
+- stage: docker_build
+  displayName: docker build and push
+  dependsOn: continous_integration
+  condition: succeeded()
   jobs:
-  - job: docker_tasks
-    steps:
-      - script: 'docker build -t haroldo89/azure-devops:$(Build.BuildId) .'
-        name: build_image
-        continueOnError: false
-      # - task: Docker@2
-      #   displayName: build_image
-      #   inputs:
-      #     containerRegistry: 'docker-haroldo89'
-      #     repository: 'haroldo89/azure-devops'
-      #     command: 'build'
-      #     Dockerfile: '**/Dockerfile'
-      - script: docker images
-      - task: Docker@2
-        displayName: push_image
-        inputs:
-          containerRegistry: 'docker-haroldo89'
-          repository: 'haroldo89/azure-devops'
-          command: 'push'
+    - job: docker_tasks
+      displayName: docker tasks
+      steps:
+        - task: Docker@2
+          displayName: build_push_image_gcp
+          inputs:
+            containerRegistry: 'docker-haroldo89'
+            repository: 'haroldo89/azure-devops'
+            command: 'buildAndPush'
+            Dockerfile: '**/Dockerfile'
+            tags:  $(Build.BuildId)
 
-- stage: Deploy
-  jobs:
-  - job: Deploy
-    steps:
-    - script: echo Deploying the code!
+        - task: Docker@2
+          displayName: build_push_image_gcp
+          inputs:
+            containerRegistry: 'gcr-tutorial'
+            repository: 'xenon-hub-327616/azure-devops'
+            command: 'buildAndPush'
+            Dockerfile: '**/Dockerfile'
+            tags:  $(Build.BuildId)
