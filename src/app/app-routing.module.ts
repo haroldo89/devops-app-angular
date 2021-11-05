@@ -9,7 +9,7 @@ import { AddNoteComponent } from './components/add-note/add-note.component';
 const routes: Routes = [
   // { path: '', redirectTo: 'front', pathMatch: 'full' },
   {
-    path: 'front',
+    path: '',
     component: LoginComponent,
   },
   {
