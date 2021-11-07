@@ -1,14 +1,14 @@
-# Default values for basicdeploy.
+# Default values for front-app.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: haroldo89/demodevops
-  pullPolicy: Allways
+  repository: haroldo89/front-app
+  pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "3"
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -36,21 +36,11 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-serviceinternal:
-  name: appangular-internal-service
+service:
   type: ClusterIP
   port: 80
-  targetPort: 80
-
-servicepublic:
-  name: appangular-public-service
-  type: LoadBalancer
-  port: 80
-  targetPort: 80
-  nodePort: 30200
 
 ingress:
-  name: appangular-public-ingress
   enabled: false
   className: ""
   annotations: {}
@@ -66,6 +56,10 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.  
 resources:
   limits:
     cpu: 100m
@@ -76,8 +70,8 @@ resources:
 
 autoscaling:
   enabled: false
-  minReplicas: 2
-  maxReplicas: 5
+  minReplicas: 1
+  maxReplicas: 100
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
