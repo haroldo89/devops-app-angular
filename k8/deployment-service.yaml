@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: frontapp
-        image: haroldo89/front-app:1
+        #image: haroldo89/front-app:1
+        image: hello:latest
         resources:
           requests:
             memory: "64Mi"
