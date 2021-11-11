@@ -1,0 +1,20 @@
+    swagger: "2.0"
+    info:
+      title: apigate 
+      description: "get the sonar server"
+      version: "1.0.0"
+    host: DNS_NAME_OF_DEPLOYED_API
+    schemes:
+      - "https"
+    paths:
+      "/sonarqube":
+        get:
+          description: "Get the airport name for a given IATA code."
+          operationId: sonarqueApp"
+          responses:
+            200:
+              description: "Success."
+              schema:
+                type: string
+            400:
+              description: "The IATA code is invalid or missing."
