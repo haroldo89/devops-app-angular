@@ -1,4 +1,4 @@
-# demo-devops :heart:
+# demo-devops
 
 demo-devops-angular
 This project was generated with Angular CLI.
