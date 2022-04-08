@@ -1,0 +1,29 @@
+# apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "12h"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  name: frontend-ingress
+  namespace: default
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /login
+        pathType: Prefix
+        backend:
+          service:
+            name: angular-front-service
+            port:
+              number: 80
+  # rules:
+  #   - http:
+  #       paths:
+  #         - backend:
+  #             serviceName: angular-front-service
+  #             servicePort: 80
+  #           path: /

@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: front-app
+  name: angular-front-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: front-app
+      app: angular-front-app
   template:
     metadata:
       labels:
-        app: front-app
+        app: angular-front-app
     spec:
       containers:
       - name: frontapp
-        image: haroldo89/front-app:1
+        image: haroldo89/devops-angular-app:1.0
         resources:
           requests:
             memory: "64Mi"
