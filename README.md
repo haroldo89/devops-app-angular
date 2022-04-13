@@ -17,3 +17,7 @@ Run `ng test` to execute the unit tests via Karma.
 
 Running end-to-end tests
 Run `ng e2e` to execute the end-to-end tests via Protractor.
+
+commands to create a image in mac with processor M1
+
+docker build --no-cache --tag haroldo89/angular-app:3 --platform linux/amd64 --push .
