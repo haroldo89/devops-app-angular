@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: angular-front-service
+  name: angular-front-service-clusterip
 spec:
   selector:
-    app: angular-front-app
+    app: angular-front-app-devops
   ports:
     - protocol: TCP
       port: 80
