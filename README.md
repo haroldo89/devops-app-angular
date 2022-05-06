@@ -21,3 +21,6 @@ Run `ng e2e` to execute the end-to-end tests via Protractor.
 commands to create a image in mac with processor M1
 
 docker build --no-cache --tag haroldo89/angular-app:3 --platform linux/amd64 --push .
+
+docker build --no-cache --tag [image-name]:[tag] --platform linux/amd64 --push .
+docker build --no-cache --tag [image-name]:[tag] --platform linux/amd64 --load .
