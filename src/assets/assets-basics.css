@@ -139,9 +139,9 @@ body {
     text-transform: uppercase!important;
 }
 .txt-white{ 
-    color: brown !important;
-    /* color: #fff!important; */
-    /* color: var(--white)!important; */
+    /* color: brown !important; */
+    color: #fff!important; 
+    color: var(--white)!important;
 }
 /* Buttons */
 .assets .btn {
