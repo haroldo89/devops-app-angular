@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-app-angular
+spec:
+  selector:
+    matchLabels:
+      app: devops-app-angular
+  template:
+    metadata:
+      labels:
+        app: devops-app-angular
+    spec:
+      containers:
+      - name: devops-app-angular
+        image: haroldo89/devops-app-angular:v0.0.1-beta
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
