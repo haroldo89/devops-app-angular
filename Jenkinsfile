@@ -17,6 +17,7 @@ node {
         sh 'npm install'
 	}
 
+    // ejemplo de como hacer un commit en un codespace virtual de github
     // stage('Unit Testing') {
     //     sh 'npm run test-ci'
     // }
@@ -55,6 +56,7 @@ node {
         sh 'docker rmi -f $(docker images -a -q)'
     }
 
+    // tener en cuenta que es un despliegue unica y exclusivamente en ambiente de gcloud, cloud run
     stage("Deploy new image to Cloud Run") {
         sh "gcloud run deploy ${IMAGE_NAME} --image ${IMAGE_TAG} --platform=managed --region=us-central1 --project=paloit-devops --port=80 --memory=512Mi --allow-unauthenticated --revision-suffix=${IMAGE_VERSION}"
     }
